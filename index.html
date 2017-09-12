@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<title>Chicharrones</title>
+	<!--Import Google Icon Font-->
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+    <link href="fonts/iconosgoogle.css" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- propios -->
+    <link rel="stylesheet" type="text/css" href="css/estilos.css">
+    <script type="text/javascript" src="js/metodos_ajax.js"></script>
+    <script type="text/javascript" src="js/ajax.js"></script>
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript">
+    	//inicio_index();
+    	$(document).ready(function(){
+    		ajaxjQuery_contenido("admin/html/footer.html","#body");
+    		$(".button-collapse").sideNav();
+    		$('.modal').modal();
+    		//$('.carousel').carousel();
+    	});
+    </script>
+</head>
+<body id="body">
+	<header>
+		<nav class="teal lighten-1">
+		    <div class="nav-wrapper">
+			    <a href="#" class="brand-logo"><img class="logo" alt="LOGO" src="imagenes/logo.png" width=""></a>
+			    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+			    <ul class="right hide-on-med-and-down">
+			        <li><a href="#"><i class="material-icons left">home</i>Inicio</a></li>
+			        <li><a class="modal-trigger" href="#modal1"><i class="material-icons left">input</i>Entrar</a></li>
+			    </ul>
+			    <ul class="side-nav" id="mobile-demo">
+			        <li><a href="#"><i class="material-icons left">home</i>Inicio</a></li>
+			        <li><a class="modal-trigger" href="#modal1"><i class="material-icons left">input</i>Entrar</a></li>
+		     	</ul>
+		    </div>
+		</nav>
+	</header>
+	<div class="row container">
+		<div class="col s12 l12">
+			<!-- <div class="col s12 l12 carousel carousel-slider">
+			    <a class="carousel-item" href="#one!"><img src="imagenes/carousel1.jpg"></a>
+			    <a class="carousel-item" href="#two!"><img src="imagenes/carousel2.jpg"></a>
+			    <a class="carousel-item" href="#three!"><img src="imagenes/carousel3.jpg"></a>
+			    <a class="carousel-item" href="#four!"><img src="imagenes/carousel4.jpg"></a>
+			    <a class="carousel-item" href="#five!"><img src="imagenes/carousel5.jpg"></a>
+			</div> -->
+			<div class="card-image">
+				<img class="" src="imagenes/banner.jpg" style="width: 100%">
+			</div>
+		</div>
+		<div class="col s12 m4 l4">
+			<div class="card-image">  <!-- waves-effect waves-block waves-light -->
+				<img class="" src="imagenes/index1.jpg" style="width: 100%">
+					<h5>¿Quienes somos?</h5>
+					<p class="textojustificado">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.}</p>
+			</div>
+		</div>
+		<div class="col s12 m4 l4">
+			<div class="card-image" >
+				<img class="" src="imagenes/index2.jpg" style="width: 100%">
+					<h5>¿Por que comprar aqui?</h5>
+					<p class="textojustificado">  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			</div>
+		</div>
+		<div class="col s12 m4 l4">
+			<div class="card-image" >
+				<img class="" src="imagenes/ubicacion.png" style="width: 100%">
+					<h5>¿Donde nos encuentra?</h5><!-- lat: 9.38333, lng: -75.4333 -->
+					<p class="textojustificado">La Palmira Sucre se encuentra en el corredor turístico del departamento de Sucre. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.}</p>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+  		<!-- Modal Structure -->
+	  	<div id="modal1" class="modal col s12 m6 offset-m3 l6 offset-l3">
+	    	<div class="modal-content">
+	      		<form id="login">
+					<div class="input-field col s12 l6">
+						<input id="usuario" name="usuario" type="text">
+						<label for="usuario">Usuario</label>
+					</div>
+					<div class="input-field col s12 l6">
+						<input id="password" name="password" type="password">
+						<label for="password">Contraseña</label>
+					</div>
+					<div class="input-field col s12 l6">
+						<input type="submit" class="btn waves-effect waves-light" value="ENTRAR">
+					</div>
+					<div id="autenticadoindex" style="display: none">
+					<div class="input-field col s12 l6">
+						<a id="iniciarcomo" class="btn waves-effect waves-light btn-flat">Usuario<i class="material-icons left">person_outline</i></a>
+					</div>
+					<div class="input-field col s12 l6">
+					    <a id="cerrarsesionindex" class="btn waves-effect btn-flat modal-trigger" href="#modalcerrarsesion">CerrarSesión</a>
+					</div>
+					</div>
+					<div class="input-field col s12 l6"> <!-- modal-footer -->
+				      	<a class="btn modal-close waves-effect waves-teal btn-flat">Cerrar</a> <!-- modal-action -->
+				      	<p></p>
+			    	</div>
+				</form>
+	    	</div>
+	    	
+	  	</div>
+  	</div>
+  	<div class="row">
+  		<div id="modalcerrarsesion" class="modal col s12 m6 offset-m3 l4 offset-l4">
+		    <div class="modal-content">
+		      	<h5>Confirmación!</h5>
+		      	<p>¿Desea cerrar sesión?</p>
+		    </div>
+		    <div class="modal-footer">
+		    	<a id="cerrarsesion" class="btn modal-action btn-flat">Si</a>
+		      	<a class="btn modal-action modal-close waves-effect btn-flat">No</a>
+		    </div>
+		 </div>
+	</div>
+
+	<script type="text/javascript">
+		var doc = document;
+		// function crearsesion(evento) {
+		// 	evento.preventDefault();
+		// 	ajaxjQuery("../php/sesion.php","login");
+		// 	// var usuario = doc.querySelector("#usuario").value;
+		// 	// var password = doc.querySelector("#password").value;
+			
+
+		// 	// if (usuario == id && password == clave) {
+		// 	// 	sessionStorage.setItem("nombre", usuario);
+		// 	// 	window.location.href = "admin/administrador.html";
+		// 	// }
+		// 	// else {
+		// 	// 	alert("Datos incorrectos");
+		// 	// 	evento.target.reset();
+		// 	// }
+		// }
+		$('#login').on('submit',function(e) {
+			e.preventDefault();
+			ajaxjQuery("php/sesion.php","login");
+    	 });
+
+		function obtenersesionindex() {
+			var nombre = sessionStorage.getItem("nombre");
+			if (nombre!==null) {
+				if (nombre!==undefined){
+					var iniciarcomo = document.getElementById("iniciarcomo");
+					iniciarcomo.innerHTML = "Soy <b>"+nombre+"</b>";
+					document.getElementById("autenticadoindex").style.display = "inline";
+				}
+			}
+		}
+		doc.getElementById('iniciarcomo').onclick = function () {
+			var nombre = sessionStorage.getItem("nombre");
+			return (nombre===null || nombre === undefined)?window.location.href = "index.html":(nombre>=0)?window.location.href = "admin/vendedor.html":false;
+		};
+
+		doc.querySelector("#cerrarsesionindex").onclick = function () {
+
+			//var vercerrar = confirm("Confirme que desea cerrar sesión");
+			// alert(vercerrar);
+			// if(vercerrar){
+			// 	sessionStorage.clear();
+			// 	window.location.href = "index.html"
+			// }
+		}
+		doc.querySelector("#cerrarsesion").onclick = function () {
+			sessionStorage.clear();
+			window.location.href = "index.html";
+		}
+
+		window.onload = obtenersesionindex;
+	</script>
+
+</body>
+</html>

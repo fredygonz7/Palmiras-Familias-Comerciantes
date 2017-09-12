@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Chicharron - admin</title>
+	<!--Import Google Icon Font-->
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+    <link href="fonts/iconosgoogle.css" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../css/materialize.min.css" media="screen,projection"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- propios -->
+    <link rel="stylesheet" type="text/css" href="../css/estilos.css">
+    <!-- <script type="text/javascript" src="../js/metodos_ajax.js"></script> -->
+    <script type="text/javascript" src="../js/ajax.js"></script>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../js/materialize.min.js"></script>
+    <script type="text/javascript" src="../js/spin.min.js"></script>
+    <script type="text/javascript">
+        
+    	$(document).ready(function(){
+    		ajaxjQuery_contenido("html/footer.html","#body");
+	        
+    	 	$(".button-collapse").sideNav();
+    	 	$('.modal').modal();
+    	 	//alert("corriendo");
+    	// });
+
+
+    	// $(document).on('ready',function(){
+    	// ajax
+    		//alert("corriendo");
+    	 	//var pet = $('#forgenemp').attr('action');
+    	 	//var met = $('#forgenemp').attr('method');
+	    	//alert(pet)
+    	 	//$('#forgenemp').on('submit',function(e) {
+    	 	$('#forgenemp').on('submit',function(e) {
+     	 		e.preventDefault();//para que no se abra el archivo php
+     	 		ajaxjQuery("peticion.php","forgenemp");
+
+    // 	 		$.ajax({
+	   //  	 		beforeSend: function () {
+	   //  	 			//$('#status').spin({radius:3,width:2,height:2,length:4});
+	   //  	 		}
+	   //  	 		url: pet,
+				//     type: met,
+				//     data: $('#forgenemp').serialize(),
+				//     success: function (resp) {
+				//     	//$('#status').html("<i class='material-icons'>sync</i>");
+				//     	console.log(resp);
+				//     }
+				//     error: function (jqXHR, estado,error) {
+				//     	//$('#status').html("<i class='material-icons'>close</i>");
+				//     	console.log(estado);
+				//     	console.log(error);
+				//     }
+				//     complete: function (jqXHR, estado) {
+				//     	console.log(estado);
+				//     },
+				//     timeout: 3000
+				// })//.responseText;   
+    	 	})
+    	})
+    </script>
+</head>
+<body id="body">
+	<header>
+		<nav class="teal lighten-1">
+		    <div class="nav-wrapper">
+			    <a href="../index.html" class="brand-logo"><img alt="LOGO" class="logo" src="../imagenes/logo.png"></a>
+			    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+		     	<ul class="right hide-on-med-and-down">
+		        	<li><a href="../index.html"><i class="material-icons left">home</i>Inicio</a></li>
+		        	<li id="autenticado" class="tooltipped" data-delay="50" data-tooltip="Usuario"><i class="material-icons left">person_outline</i>Usuario</li>
+		        	<li><a class="waves-effect waves-light tooltipped modal-trigger" href="#modalcerrarsesion" data-delay="50" data-tooltip="Cerrar Sesion">
+						<i class="material-icons">clear</i>
+					</a></li>
+		      	</ul>
+		      	<ul class="side-nav" id="mobile-demo">
+		       		<li><a href="../index.html"><i class="material-icons left">home</i>Inicio</a></li>
+		       		<li class="black-text"><a id="autenticado" style="cursor: text;"><i class="material-icons left">person_outline</i>Usuario</a></li>
+		       		<li><a class="modal-trigger" href="#modalcerrarsesion"><i class="material-icons left">clear</i>Cerrar Sesion</a></li>
+		       		<div class="card-content center">
+						<h5 class="black-text">Opciones</h5>
+					</div>
+		       		<li><a href="#" id="opcionventas">VENTAS</a></li>
+					<li><a href="#" id="opciongastos">GASTOS</a></li>
+					<li><a href="#" id="opcionconusltas">CONSULTAS</a></li>
+					<li><a href="#" id="opcionagregarinsumos">AGREGAR INSUMOS</a></li>
+					<li><a href="#" id="opciongestionarempleados" class="collection-item">GESTIONAR EMPLEADOS</a></li>
+		      	</ul>
+		    </div>
+		</nav>
+	</header>
+	<div id="contenido" class="row">
+		<!-- seccion de opciones -->
+		<div class="col s12 l4 hide-on-med-and-down">
+			<div class="card">
+				<div class="card-content center">
+					<h5>Opciones</h5>
+				</div>
+				<div class="collection">
+					<a href="#" id="opcionventas" class="collection-item active">VENTAS</a>
+					<a href="#" id="opciongastos" class="collection-item">GASTOS</a>
+					<a href="#" id="opcionconusltas" class="collection-item">CONSULTAS</a>
+					<a href="#" id="opcionagregarinsumos" class="collection-item">AGREGAR INSUMOS</a> <!-- seccionagregarinsumos -->
+					<a href="#" id="opciongestionarempleados" class="collection-item">GESTIONAR EMPLEADOS</a>
+				</div>
+			</div>
+		</div>
+		<!-- seccion de ventas -->
+	<!-- 	<div id="seccionventas" class="col s12 l8">
+			<div class="card-panel col s12 l12">
+            	<span class="card-title center"><h5>VENTAS</h5></span>
+         		<form class="">
+					<div class="input-field col s12 m6 l6">
+						<input id="ventas_valor" value="" type="text">
+						<label for="ventas_valor">VALOR</label>
+					</div>
+					<div class="input-field col s12 m6 l6">
+						<input id="ventas_efectivo" value="" type="text">
+						<label for="ventas_efectivo">EFECTIVO</label>
+					</div>
+					<div class="input-field col s12 l12">
+						<p style="color: gray" for="ventas_cambio">CAMBIO</p>
+						<p id="ventas_cambio"></p>
+					</div>
+					<div class="input-field col s12 m4 offset-m2 l3 offset-l2 center">
+						<input type="button" class="btn waves-effect waves-light" id="ventas_guardar" value="GUARDAR">
+					</div>
+					<div class="input-field col s12 m4 l3 offset-l1 center">
+						<input type="reset" class="btn waves-effect waves-light" id="ventas_cancelar" value="CANCELAR"><br><br>
+					</div>
+				</form>
+			</div>
+		</div>
+-->
+		<!-- seccion de gastos -->
+<!--		<div id="secciongastos" class="col s12 l8" style="display: none">
+			<div class="card-panel col s12 l12">
+            	<span class="card-title center"><h5>GASTOS</h5></span>
+         		<form class="">
+					<div class="input-field col s12 m6 l6">
+						<input id="gastos_valor" value="" type="text">
+						<label for="gastos_valor">VALOR</label>
+					</div>
+					<div class="input-field col s12 l6">
+					    <select id="tipo_insumo">
+					    	<option value="" disabled selected>Seleccione una opción</option>
+					    	<option value="1">ACEITE</option>
+							<option value="2">CERDO</option>
+							<option value="3">VARIOS</option>
+							<option value="4">OTROS</option>
+						</select>
+					    <label for="tipo_insumo">TIPO DE INSUMO</label>
+					</div>
+					<div class="input-field col s12 m4 offset-m2 l3 offset-l2 center">
+						<input type="button" class="btn waves-effect waves-light" id="gastos_guardar" value="GUARDAR">
+					</div>
+					<div class="input-field col s12 m4 l3 offset-l1 center">
+						<input type="reset" class="btn waves-effect waves-light" id="gastos_cancelar" value="CANCELAR"><br><br>
+					</div>
+				</form>
+			</div>
+		</div>
+-->
+		<!-- seccion de  CONSULTAS-->
+<!--		<div id="seccionconsultas" class="col s12 l8" style="display: none">
+			<div class="card-panel col s12 l12">
+            	<span class="card-title center"><h5>CONSULTAS</h5></span>
+         		<form class="">
+					
+					<div class="input-field col s12 l12">
+					    <select id="consultas_tipo">
+					    	<option value="" disabled selected>Seleccione una opción</option>
+					    	<option value="1">Dia</option>
+							<option value="2">Mes</option>
+							<option value="3">Rango</option>
+						</select>
+					    <label for="consultas_tipo">Tipo de consulta</label>
+					</div>
+					
+					<div id="seccionconsultasdia" class="input-field col s12 m12 l12" style="display: none">
+						<input id="consulta_dia" type="text" class="datepicker">
+						<label for="consulta_dia">Seleccione el Dia</label>
+				*******	<! <input type="date" class="datepicker">    -> 
+					</div>
+					<div id="seccionconsultasmes" class="input-field col s12 m12 l12" style="display: none">
+						<input id="consulta_mes" type="text" class="datepicker">
+						<label for="consulta_mes">Seleccione el Mes</label>
+				******					<! <input type="date" class="datepicker">     ->
+					</div>
+					<div id="seccionconsultasrango" class="input-field col s12 m12 l12" style="display: none">
+						<div class="input-field col s12 m6 l6">
+							<input id="consulta_rangominimo" type="text" class="datepicker">
+							<label for="consulta_minimo">Dia Minimo</label>
+						</div>
+						<div class="input-field col s12 m6 l6">
+							<input id="consulta_rangomaximo" type="text" class="datepicker">
+							<label for="consulta_rangomaximo">Dia Maximo</label>
+							***					<!- <input type="date" class="datepicker">     ->
+						</div>
+					</div>
+					<div class="input-field col s12 m4 offset-m2 l3 offset-l2 center">
+						<input type="button" class="btn waves-effect waves-light" id="consultas_guardar" value="GUARDAR">
+					</div>
+					<div class="input-field col s12 m4 l3 offset-l1 center">
+						<input type="reset" class="btn waves-effect waves-light" id="consultas_cancelar" value="CANCELAR"><br><br>
+					</div>
+				</form>
+			</div>
+		</div>
+-->
+		<!-- seccionagregarinsumos -->
+		<!--<div id="seccionagregarinsumos" class="col s12 l8" style="display: none">
+			<div class="card-panel col s12 l12">
+            	<span class="card-title center"><h5>AGREGAR INSUMOS</h5></span>
+         		<form class="">
+					<div class="input-field col s12 offset-l3 offset-m3 m6 l6">
+						<input id="gastos_valor" type="text">
+						<label for="gastos_valor">Tipo de Producto</label>
+					</div>
+					<div class="input-field col s12 m4 offset-m2 l3 offset-l2 center">
+						<input type="button" class="btn waves-effect waves-light" id="gastos_guardar" value="GUARDAR">
+					</div>
+					<div class="input-field col s12 m4 l3 offset-l1 center">
+						<input type="reset" class="btn waves-effect waves-light" id="gastos_cancelar" value="CANCELAR"><br><br>
+					</div>
+				</form>
+			</div>
+		</div> -->
+
+		<!-- secciongestionarempleados -->
+		<div id="secciongestionarempleados" class="col s12 l8">  <!-- style="display: online" -->
+			<div class="card-panel col s12 l12">
+            	<span class="card-title center"><h5>GESTIONAR EMPLEADOS</h5></span>
+         		<!-- <form action="peticion.php" id="forgenemp" method="POST"> -->
+         		<form id="forgenemp">
+					<div class="input-field col s12 m6 l6">
+						<input name="gestionar_numide" id="gestionar_numide" type="text">
+						<label for="gestionar_numide">Numero de identificación</label>
+					</div>
+					<div class="input-field col s12 m6 l6">
+						<input name="gestionar_nombres" id="gestionar_nombres" type="text">
+						<label for="gestionar_nombres">Nombres</label>
+					</div>
+					<div class="input-field col s12 m6 l6">
+						<input name="gestionar_apellidos" id="gestionar_apellidos" type="text">
+						<label for="gestionar_apellidos">Apellidos</label>
+					</div>
+					<div class="input-field col s12 m6 l6">
+						<input name="gestionar_password" id="gestionar_password" type="password">
+						<label for="gestionar_password">Contraseña</label>
+					</div>
+					<div class="input-field col s12 m4 offset-m2 l3 offset-l2 center">
+						<input type="submit" class="btn waves-effect waves-light" id="gastos_guardar" name="send" value="GUARDAR">
+						<div id="status"></div>
+					</div>
+					<div class="input-field col s12 m4 l3 offset-l1 center">
+						<input type="reset" class="btn waves-effect waves-light" id="gastos_cancelar" value="CANCELAR"><br><br>
+					</div>
+				</form>
+			</div>
+			<!-- <div class="card col s12 l12">
+				<div class="card-content">
+					<table class="striped responsive-table">
+						<thead>
+							<tr>
+								<th>N° IDENTIFICACIÓN</th>
+								<th>NOMBRES</th>
+								<th>APELLIDOS</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>92520188</td>
+								<td>MATEO</td>
+								<td>PEREZ GOMEZ</td>
+								<td>
+									<a class="btn-floating btn-large waves-effect waves-light tooltipped" data-delay="50" data-tooltip="Editar">
+										<i class="material-icons">edit</i>
+									</a>
+									<a class="btn-floating btn-large waves-effect waves-light tooltipped" data-delay="50" data-tooltip="Eliminar">
+										<i class="material-icons">clear</i>
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td>92472881</td>
+								<td>FRANCISCO</td>
+								<td>ARRIETA MARTINEZ</td>
+								<td>
+									<a class="btn-floating btn-large waves-effect waves-light tooltipped" data-delay="50" data-tooltip="Editar">
+										<i class="material-icons">edit</i>
+									</a>
+									<a class="btn-floating btn-large waves-effect waves-light tooltipped" data-delay="50" data-tooltip="Eliminar">
+										<i class="material-icons">clear</i>
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td>64211929</td>
+								<td>MARIA</td>
+								<td>ACOSTA VERGARA</td>
+								<td>
+									<a class="btn-floating btn-large waves-effect waves-light tooltipped" data-delay="50" data-tooltip="Editar">
+										<i class="material-icons">edit</i>
+									</a>
+									<a class="btn-floating btn-large waves-effect waves-light tooltipped" data-delay="50" data-tooltip="Eliminar">
+										<i class="material-icons">clear</i>
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div> -->
+		</div>
+	</div>
+	<div class="row">
+  		<div id="modalcerrarsesion" class="modal col s12 m6 offset-m3 l4 offset-l4">
+		    <div class="modal-content">
+		      	<h5>Confirmación!</h5>
+		      	<p>¿Desea cerrar sesión?</p>
+		    </div>
+		    <div class="modal-footer">
+		    	<a id="cerrarsesion" class="btn modal-action btn-flat">Si</a>
+		      	<a class="btn modal-action modal-close waves-effect btn-flat">No</a>
+		    </div>
+		 </div>
+	</div>
+
+	<script type="text/javascript">
+		$('select').material_select();
+		//fecha dia
+		$('.datepicker').pickadate({
+		    selectMonths: true, // Creates a dropdown to control month
+		    selectYears: 15, // Creates a dropdown of 15 years to control year,
+		    today: 'Today',
+		    clear: 'Clear',
+		    close: 'Ok',
+		    closeOnSelect: false // Close upon selecting a date,
+		});
+      
+		$(document).ready(function(){
+
+			//opciones------------------------------
+			var veltrans=500;
+			//opcionventas
+			$("a#opcionventas").click(function(){
+				$("#seccionventas").show(veltrans);
+				$("#secciongastos").hide(veltrans);
+				$("#seccionconsultas").hide(veltrans);
+				$("#seccionagregarinsumos").hide(veltrans);
+				$("#secciongestionarempleados").hide(veltrans)
+				quitaractiveopciones();
+				$("a#opcionventas").addClass("active");
+				//$("#mobile-demo").css("transform", "translateX(-100%)");
+				//agregar o quitar clase
+			});
+			//opciongastos
+			$("a#opciongastos").click(function(){
+				$("#secciongastos").show(veltrans);
+				$("#seccionventas").hide(veltrans);
+				$("#seccionconsultas").hide(veltrans);
+				$("#seccionagregarinsumos").hide(veltrans);
+				$("#secciongestionarempleados").hide(veltrans)
+				quitaractiveopciones();
+				$("a#opciongastos").addClass("active");
+			});
+			//opcionconusltas
+			$("a#opcionconusltas").click(function(){
+				$("#secciongastos").hide(veltrans);
+				$("#seccionventas").hide(veltrans);
+				$("#seccionconsultas").show(veltrans);
+				$("#seccionagregarinsumos").hide(veltrans);
+				$("#secciongestionarempleados").hide(veltrans)
+				quitaractiveopciones();
+				$("a#opcionconusltas").addClass("active");
+			});
+			//opcionagregarinsumos
+			$("a#opcionagregarinsumos").click(function(){
+				$("#secciongastos").hide(veltrans);
+				$("#seccionventas").hide(veltrans);
+				$("#seccionconsultas").hide(veltrans);
+				$("#seccionagregarinsumos").show(veltrans);
+				$("#secciongestionarempleados").hide(veltrans)
+				quitaractiveopciones();
+				$("a#opcionagregarinsumos").addClass("active");
+			});
+			//opciongestionarempleados
+			$("a#opciongestionarempleados").click(function(){
+				$("#secciongastos").hide(veltrans);
+				$("#seccionventas").hide(veltrans);
+				$("#seccionconsultas").hide(veltrans);
+				$("#seccionagregarinsumos").hide(veltrans);
+				$("#secciongestionarempleados").show(veltrans)
+				quitaractiveopciones();
+				$("a#opciongestionarempleados").addClass("active");
+			});
+			//ventas--------------------------------
+			$("#ventas_guardar").click(function(){
+				var vvalor = 1*$("#ventas_valor").val();
+				var vefectivo = 1*$("#ventas_efectivo").val();
+				if (vefectivo>=vvalor) {
+					$("#ventas_cambio").html(vefectivo-vvalor);
+				}
+				else {
+					$("#ventas_cambio").html("Error en los datos");
+				}
+			});
+			$("#ventas_cancelar").click(function(){
+				//$("#ventas_valor").val("");
+				$("#ventas_cambio").html("");
+				//$("#ventas_efectivo").val("");
+			});
+
+			//gastos-----------------------------------
+			// $("#gastos_guardar").click(function(){
+			// 	var gvalor = $("#gastos_valor").val();
+			// 	//var efectivo = $("#gastos_efectivo").val();
+			// });
+			$("#gastos_cancelar").click(function(){
+				$("#gastos_valor").val("");
+				//$('#tipo_insumo').val("");
+			});
+
+			// consultas--------------------------------
+			$("#consultas_tipo").change(function(){
+				switch($("#consultas_tipo").val()) {
+					case "0":
+						$('#seccionconsultasdia').hide(1000);
+						$('#seccionconsultasmes').hide(1000);
+						$('#seccionconsultasrango').hide(1000);
+						break;
+					case "1":
+						$('#seccionconsultasdia').show(1000);
+						$('#seccionconsultasmes').hide(1000);
+						$('#seccionconsultasrango').hide(1000);
+						break;
+					case "2":
+						$('#seccionconsultasdia').hide(1000);
+						$('#seccionconsultasmes').show(1000);
+						$('#seccionconsultasrango').hide(1000);
+						break;
+					case "3":
+						$('#seccionconsultasdia').hide(1000);
+						$('#seccionconsultasmes').hide(1000);
+						$('#seccionconsultasrango').show(1000);
+						break;
+				}
+			});
+		});
+		function quitaractiveopciones() {
+			$("a#opcionventas").removeClass("active");
+			$("a#opciongastos").removeClass("active");
+			$("a#opcionconusltas").removeClass("active");
+			$("a#opcionagregarinsumos").removeClass("active");
+			$("a#opciongestionarempleados").removeClass("active");
+		}
+	</script>
+	<script type="text/javascript">
+		doc = document;
+		function obtenersesion() {
+			var nombre = sessionStorage.getItem("nombre");
+			autenticado = doc.querySelectorAll("#autenticado");
+			autenticado[0].innerHTML = nombre+'<i class="material-icons left">person_outline</i></li>';
+			autenticado[1].innerHTML = nombre+'<i class="material-icons left">person_outline</i></li>';
+
+			return (nombre===null || nombre === undefined)?window.location.href = "../index.html":false;
+		}
+
+		doc.querySelector("#cerrarsesion").onclick = function () {
+			sessionStorage.clear();
+			window.location.href = "../index.html"
+		}
+		window.onload = obtenersesion;
+	</script>
+</body>
+</html>

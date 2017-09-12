@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Chicharron - admin</title>
+	<!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <link href="../fonts/iconosgoogle.css" rel="stylesheet"> -->
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../css/materialize.min.css" media="screen,projection"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- propios -->
+    <link rel="stylesheet" type="text/css" href="../css/estilos.css">
+    <script type="text/javascript" src="../js/metodos_ajax.js"></script>
+    <script type="text/javascript" src="../js/ajax.js"></script>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../js/materialize.min.js"></script>
+    <script type="text/javascript">
+    	//inicio_admin();
+        
+    	$(document).ready(function(){
+    		ajaxjQuery_contenido("html/footer.html","#body");
+    	 	$(".button-collapse").sideNav();
+    	 	$('.modal').modal();
+    	});
+    </script>
+</head>
+<body id="body">
+	<header>
+		<nav class="teal lighten-1">
+		    <div class="nav-wrapper">
+			    <a href="../index.html" class="brand-logo"><img alt="LOGO" class="logo" src="../imagenes/logo.png"></a>
+			    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+		     	<ul class="right hide-on-med-and-down">
+		        	<li><a href="../index.html"><i class="material-icons left">home</i>Inicio</a></li>
+		        	<li id="autenticadovendedor" class="tooltipped" data-delay="50" data-tooltip="Usuario"><i class="material-icons left">person_outline</i>Usuario</li>
+					<span id="usuario_activo" hidden></span>
+		        	<li><a class="waves-effect waves-light tooltipped modal-trigger" href="#modalcerrarsesionvendedor" data-delay="50" data-tooltip="Cerrar Sesion">
+						<i class="material-icons">clear</i>
+					</a></li>
+		      	</ul>
+		      	<ul class="side-nav" id="mobile-demo">
+		       		<li><a href="../index.html"><i class="material-icons left">home</i>Inicio</a></li>
+		       		<li class="black-text"><a id="autenticadovendedor" style="cursor: text;"><i class="material-icons left">person_outline</i>Usuario</a></li>
+		       		<li><a class="modal-trigger" href="#modalcerrarsesionvendedor"><i class="material-icons left">clear</i>Cerrar Sesion</a></li>
+		      	</ul>
+		    </div>
+		</nav>
+	</header>
+	<div id="contenido" class="row">
+		<!-- seccion de ventas -->
+		<div id="seccionventas" class="col s12 l8 offset-l2">
+			<div class="card-panel col s12 l12">
+            	<span class="card-title center"><h5>VENTAS</h5></span>
+         		<form id="forven">
+					<div class="input-field col s12 m6 l6">
+						<input id="ventas_valor" name="ventas_valor" type="text" maxlength="20" pattern="^[0-9]+([.][0-9]+)?$" placeholder="numero decimal 1111.11" required>
+						<label for="ventas_valor">VALOR</label>
+					</div>
+					<div class="input-field col s12 m6 l6">
+						<input id="ventas_efectivo" type="text" maxlength="20" pattern="^[0-9]+([.][0-9]+)?$" placeholder="numero decimal 1111.11">
+						<label for="ventas_efectivo">EFECTIVO</label>
+					</div>
+					<div class="input-field col s12 l12">
+						<p style="color: gray" for="ventas_cambio">CAMBIO</p>
+						<p id="ventas_cambio"></p>
+					</div>
+					<div class="input-field col s12 m4 offset-m2 l3 offset-l2 center">
+						<input type="submit" class="btn waves-effect waves-light" id="ventas_guardar" value="GUARDAR">
+					</div>
+					<div class="input-field col s12 m4 l3 offset-l1 center">
+						<input type="reset" class="btn waves-effect waves-light" id="ventas_cancelar" value="CANCELAR"><br><br>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+  		<div id="modalcerrarsesionvendedor" class="modal col s12 m6 offset-m3 l4 offset-l4">
+		    <div class="modal-content">
+		      	<h5>Confirmación!</h5>
+		      	<p>¿Desea cerrar sesión?</p>
+		    </div>
+		    <div class="modal-footer">
+		    	<a id="cerrarsesionvendedor" class="btn modal-action btn-flat">Si</a>
+		      	<a class="btn modal-action modal-close waves-effect btn-flat">No</a>
+		    </div>
+		 </div>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			//ventas--------------------------------
+			$('#forven').on('submit',function(e) {
+     	 		e.preventDefault();//para que no se abra el archivo php
+     	 		ajaxjQuery("../php/ventas.php","forven");
+    	 	});
+
+			$("#ventas_valor").keyup(function(){
+				obtener_cambio();
+			});
+			$("#ventas_efectivo").keyup(function(){
+				obtener_cambio();
+			});
+			function obtener_cambio() {
+				if ($("#ventas_valor").val!="" && $("#ventas_efectivo").val()!="") {
+					var vvalor = 1*$("#ventas_valor").val();
+					var vefectivo = 1*$("#ventas_efectivo").val();
+					if (vefectivo>=vvalor) {
+						$("#ventas_cambio").html(vefectivo-vvalor);
+					}
+					else {
+						$("#ventas_cambio").html("Error en los datos");
+					}
+				}
+			}
+			$("#ventas_cancelar").click(function(){
+				$("#ventas_cambio").html("");
+			});
+		});
+	</script>
+	<script type="text/javascript">
+		doc = document;
+		function obtenersesion() {
+                      return (sessionStorage.getItem("nombre")===null || sessionStorage.getItem("nombre") === undefined)?window.location.href = "../index.html":false;
+			var nombre = sessionStorage.getItem("nombre");
+			objeto_nombre={"nombre":nombre};
+			//alert(JSON.stringify(nombre));
+			
+			var respuesta=$.ajax({
+		        type: "POST",   
+		        url: "../php/sesion.php",
+		        async: false,
+		        data: objeto_nombre
+		    }).responseText;
+		    objeto=JSON.parse(respuesta);
+		    if (objeto.cargo=="administrador") {
+		    	window.location.href = "administrador.html";
+		    }
+		    else {
+		    	autenticado = doc.querySelectorAll("#autenticadovendedor");
+				autenticado[0].innerHTML = nombre+'<i class="material-icons left">person_outline</i></li>';
+				autenticado[1].innerHTML = nombre+'<i class="material-icons left">person_outline</i></li>';
+				$('#usuario_activo').html(nombre);
+		    }
+			return (nombre===null || nombre === undefined)?window.location.href = "../index.html":false;
+		}
+		doc.querySelector("#cerrarsesionvendedor").onclick = function () {
+			sessionStorage.clear();
+			window.location.href = "../index.html"
+		}
+		window.onload = obtenersesion;
+	</script>
+</body>
+</html>
